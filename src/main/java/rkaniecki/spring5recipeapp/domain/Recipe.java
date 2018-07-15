@@ -23,8 +23,7 @@ public class Recipe {
     private String source;
     private String url;
     private String directions;
-    //todo add
-    //difficulty
+    //todo add difficulty
 
     @Lob
     private Byte[] image;
