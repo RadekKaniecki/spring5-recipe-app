@@ -102,6 +102,7 @@ class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
         Category mexican = mexicanOptional.get()
         Category fastFood = fastFoodOptional.get()
 
+        //creating recipes
         //perfect guacamole recipe
         Recipe guacamoleRecipe = new Recipe()
         guacamoleRecipe.description = ("Perfect Guacamole")
@@ -144,6 +145,42 @@ class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
         //add to return list
         recipes.add(guacamoleRecipe)
+
+        //Grilled Corn on the Cob
+        Recipe grilledCornRecipe = new Recipe()
+        grilledCornRecipe.description = "Grilled Corn on the Cob"
+        grilledCornRecipe.prepTime = 5
+        grilledCornRecipe.cookTime = 20
+        grilledCornRecipe.directions = "1 Prepare your grill, gas or charcoal, for direct, high heat. (About 550°F) You know the grill is hot enough if are able to hold your hand one inch above the grill for only 1 second.\n" +
+                "\n" +
+                "2 Grill corn in husks: The corn husks will protect the corn from burning or drying out while it is on the hot grill.\n" +
+                "\n" +
+                "If you want a bit of char on your corn, peel off a few of the outer layers of the corn husks first, before grilling.\n" +
+                "\n" +
+                "Place the corn in their husks on the hot grill.\n" +
+                "\n" +
+                "Cover the grill. Turn the corn occasionally, until the husks are completely blackened and charred on all sides, about 15 to 20 minutes.\n" +
+                "\n" +
+                "3 Remove silks and charred husks: Remove the corn from the grill. Let them sit for 5 minutes or until cool enough to handle.\n" +
+                "\n" +
+                "Remove the silks and charred husks from the corn. If you need to, use a damp towel to protect your hands from any sharp edges from the charred corn husks as you peel them off.\n" +
+                "\n" +
+                "4 Serve with butter. (Or you can sprinkle with a little chili powder, cotija cheese, and some lime juice for a Mexican twist.)"
+
+        Notes grilledCornNotes = new Notes()
+        grilledCornNotes.recipeNotes = "If you want some grill marks on your corn on the cob, (as shown in the photos), you can pull off a few of the outer husk leaves, leaving less of a barrier between the outer leaves and the corn cob, for more the charring to reach the corn."
+        grilledCornRecipe.notes = grilledCornNotes
+        grilledCornNotes.recipe = grilledCornRecipe
+
+        grilledCornRecipe.ingredients.add(new Ingredient(description: "4 ears fresh corn, in their husks", amount: 4, unitOfMeasure: each, recipe: grilledCornRecipe))
+        grilledCornRecipe.ingredients.add(new Ingredient(description: "butter", amount: 0.5, unitOfMeasure: each, recipe: grilledCornRecipe))
+
+        grilledCornRecipe.difficulty = Difficulty.EASY
+
+        grilledCornRecipe.categories.add(american)
+
+        //add to return list
+        recipes.add(grilledCornRecipe)
 
         recipes
     }
