@@ -9,7 +9,7 @@ import javax.persistence.OneToOne;
 import java.math.BigDecimal;
 
 @Entity
-public class Ingredients {
+public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
