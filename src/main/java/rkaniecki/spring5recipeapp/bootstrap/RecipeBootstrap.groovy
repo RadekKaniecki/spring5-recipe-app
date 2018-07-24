@@ -146,6 +146,10 @@ class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
         guacamoleNotes.recipe = guacamoleRecipe
         guacamoleRecipe.notes = guacamoleNotes
 
+        guacamoleRecipe.servings = 4
+        guacamoleRecipe.url = "www.simplerecipes.com"
+        guacamoleRecipe.source = "Simple Recipes"
+
         //add to return list
         recipes.add(guacamoleRecipe)
 
@@ -181,6 +185,10 @@ class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
         grilledCornRecipe.difficulty = Difficulty.EASY
 
         grilledCornRecipe.categories.add(american)
+
+        grilledCornRecipe.servings = 4
+        grilledCornRecipe.url = "www.simplerecipes.com"
+        grilledCornRecipe.source = "Simple Recipes"
 
         //add to return list
         recipes.add(grilledCornRecipe)

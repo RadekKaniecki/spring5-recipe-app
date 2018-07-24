@@ -8,9 +8,11 @@ import rkaniecki.spring5recipeapp.domain.Recipe;
 import rkaniecki.spring5recipeapp.repositories.RecipeRepository;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -43,5 +45,22 @@ public class RecipeServiceImplTest {
         //Then
         assertEquals(1, recipes.size());
         verify(recipeRepository, times(1)).findAll();
+    }
+
+    @Test
+    public void getRecipeById() {
+        //Given
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+        Optional<Recipe> recipeOptional = Optional.of(recipe);
+
+        //When
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+        Recipe recipeReturned = recipeService.findById(1L);
+
+        //Then
+        assertNotNull("Null recipe returned", recipeReturned);
+        verify(recipeRepository, times(1)).findById(anyLong());
+        assertEquals(recipe, recipeReturned);
     }
 }

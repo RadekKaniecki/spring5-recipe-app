@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show Recipe</title>
+</head>
+<!--/*@thymesVar id="recipe" type="rkaniecki.spring5recipeapp.domain.Recipe"*/-->
+<body>
+    <div>
+        <h4 th:text="${recipe.getDescription()}">Recipe description here!</h4>
+
+        <p>Categories:</p>
+        <ul>
+            <li th:each="category : ${recipe.categories}" th:text="${category.getDescription()}"></li>
+        </ul>
+
+        <p>Prep time:</p>
+        <ul>
+            <li th:text="${recipe.getPrepTime() + ' min'}"></li>
+        </ul>
+
+
+        <p>Cook time:</p>
+        <ul>
+            <li th:text="${recipe.getCookTime() + ' min'}"></li>
+        </ul>
+
+        <p>Source:</p>
+        <ul>
+            <li th:text="${recipe.getSource()}"></li>
+        </ul>
+
+        <p>Difficulty:</p>
+        <ul>
+            <li th:text="${recipe.getDifficulty()}"></li>
+        </ul>
+
+        <p>Servings:</p>
+        <ul>
+            <li th:text="${recipe.getServings()}"></li>
+        </ul>
+
+        <p>URL:</p>
+        <ul>
+            <li th:text="${recipe.getUrl()}"></li>
+        </ul>
+    </div>
+
+    <div>
+        <h4>Ingredients</h4>
+
+        <ul>
+            <li th:each="ingredient : ${recipe.getIngredients()}"
+                th:text="${ingredient.getAmount() +
+                ' - ' + ingredient.getUnitOfMeasure().description +
+                ' - ' + ingredient.getDescription()}">Ingredient 1</li>
+        </ul>
+    </div>
+
+    <div>
+        <h4>Directions</h4>
+        <p th:text="${recipe.getDirections()}"></p>
+    </div>
+
+    <div>
+        <h4>Notes:</h4>
+        <p th:text="${recipe.getNotes().recipeNotes}"></p>
+    </div>
+
+</body>
+</html>
