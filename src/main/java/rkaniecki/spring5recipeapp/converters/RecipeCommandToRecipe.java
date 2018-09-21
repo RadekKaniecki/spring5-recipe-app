@@ -27,7 +27,7 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
         if (source != null) {
             final Recipe recipe = new Recipe();
             recipe.setId(source.getId());
-            recipe.setNotes(notesConverter.convert(source.getNotesCommand()));
+            recipe.setNotes(notesConverter.convert(source.getNotes()));
             recipe.setDirections(source.getDirections());
             recipe.setPrepTime(source.getPrepTime());
             recipe.setDescription(source.getDescription());
@@ -40,12 +40,16 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
             if (source.getIngredients() != null && source.getIngredients().size() > 0) {
                 source.getIngredients().forEach(
                         ingredientCommand -> recipe.getIngredients().add(ingredientConverter.convert(ingredientCommand)));
+            } else {
+                recipe.setIngredients(null);
             }
 
             if (source.getCategories() != null && source.getCategories().size() >0) {
                 source.getCategories().forEach(
                         categoryCommand -> recipe.getCategories().add(categoryConverter.convert(categoryCommand))
                 );
+            } else {
+                recipe.setCategories(null);
             }
 
             return recipe;
