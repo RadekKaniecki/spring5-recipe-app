@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import rkaniecki.spring5recipeapp.converters.RecipeCommandToRecipe;
+import rkaniecki.spring5recipeapp.converters.RecipeToRecipeCommand;
 import rkaniecki.spring5recipeapp.domain.Recipe;
 import rkaniecki.spring5recipeapp.repositories.RecipeRepository;
 
@@ -23,12 +25,16 @@ public class RecipeServiceImplTest {
 
     @Mock
     private RecipeRepository recipeRepository;
+    @Mock
+    private RecipeToRecipeCommand recipeToRecipeCommand;
+    @Mock
+    private RecipeCommandToRecipe recipeCommandToRecipe;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
     }
 
     @Test
