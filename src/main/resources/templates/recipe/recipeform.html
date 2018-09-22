@@ -52,6 +52,12 @@
 
         <div>
             <h3>Ingredients:</h3>
+            <ul>
+                <li th:each="ingredient : ${recipe.getIngredients()}"
+                th:text="${ingredient.getAmount() +
+                        ' - ' + ingredient.getUnitOfMeasureCommand().description +
+                        ' - ' + ingredient.getDescription()}"></li>
+            </ul>
         </div>
 
         <div>
