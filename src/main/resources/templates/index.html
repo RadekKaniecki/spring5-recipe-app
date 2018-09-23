@@ -6,21 +6,32 @@
 </head>
 <!--/*@thymesVar id="recipe" type="rkaniecki.spring5recipeapp.domain.Recipe"*/-->
 <body>
+
   <h1>Recipes</h1>
 
-  <table>
-      <tr>
-          <th>ID</th>
-          <th>Description</th>
-          <th>View</th>
-      </tr>
-      <tr th:each="recipe : ${recipes}">
-          <td th:text="${recipe.id}">123</td>
-          <td th:text="${recipe.description}">test</td>
-          <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/show'}">View</a></td>
-          <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/update'}">Update</a></td>
-      </tr>
-  </table>
+  <div>
+      <h3>Create new recipe</h3>
+      <a href="#" th:href="@{'recipe/new'}">Create</a>
+  </div>
+
+  <br>
+
+  <div>
+      <table>
+          <tr>
+              <th>ID</th>
+              <th>Description</th>
+              <th>View</th>
+          </tr>
+          <tr th:each="recipe : ${recipes}">
+              <td th:text="${recipe.id}">123</td>
+              <td th:text="${recipe.description}">test</td>
+              <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/show'}">View</a></td>
+              <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/update'}">Update</a></td>
+              <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/delete'}">Delete</a></td>
+          </tr>
+      </table>
+  </div>
 
 </body>
 </html>

@@ -66,7 +66,7 @@ public class RecipeControllerTest {
         ArgumentCaptor<Recipe> captor = ArgumentCaptor.forClass(Recipe.class);
 
         //When
-        String recipePage = recipeController.showById("5", model);
+        String recipePage = recipeController.showById(5L, model);
 
         //Then
         assertEquals("recipe/show", recipePage);
