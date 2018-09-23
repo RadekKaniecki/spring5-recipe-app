@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of ingredients</title>
+</head>
+<!--/*@thymesVar id="recipe" type="rkaniecki.spring5recipeapp.commands.RecipeCommand"*/-->
+<!--/*@thymesVar id="ingredient" type="rkaniecki.spring5recipeapp.commands.IngredientCommand"*/-->
+<body>
+<div th:if="${!recipe.ingredients.isEmpty()}">
+    <h3>Ingredients</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th>View</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tr th:each="ingredient : ${recipe.ingredients}">
+            <td th:text="${ingredient.id}"></td>
+            <td th:text="${ingredient.amount + ' - ' + ingredient.unitOfMeasureCommand.description +' - ' + ingredient.description}"></td>
+            <td><a href="#" th:href="@{'recipe/' + ${recipe.id} + '/ingredient/' + ${ingredient.id} + '/show'}">View</a></td>
+            <td><a href="#" th:href="@{'recipe/' + ${recipe.id} + '/ingredient/' + ${ingredient.id} + '/update'}">Update</a></td>
+            <td><a href="#" th:href="@{'recipe/' + ${recipe.id} + '/ingredient/' + ${ingredient.id} + '/delete'}">Delete</a></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
