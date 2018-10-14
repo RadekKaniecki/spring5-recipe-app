@@ -6,27 +6,35 @@
 </head>
 <!--/*@thymesVar id="ingredient" type="rkaniecki.spring5recipeapp.commands.IngredientCommand"*/-->
 <body>
-    <div>
-        <h3>Ingredient</h3>
-        <table>
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Recipe id</th>
-                <th>Amount</th>
-                <th>Unit of measuer</th>
-                <th>Description</th>
-            </tr>
-            </thead>
-            <tr>
-                <td th:text="${ingredient.id}"></td>
-                <td th:text="${ingredient.recipeId}"></td>
-                <td th:text="${ingredient.amount}"></td>
-                <td th:text="${ingredient.unitOfMeasureCommand.description}"></td>
-                <td th:text="${ingredient.description}"></td>
-            </tr>
-        </table>
-    </div>
+
+<div>
+    <h3>Ingredient</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Recipe id</th>
+            <th>Amount</th>
+            <th>Unit of measuer</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tr>
+            <td th:text="${ingredient.id}"></td>
+            <td th:text="${ingredient.recipeId}"></td>
+            <td th:text="${ingredient.amount}"></td>
+            <td th:text="${ingredient.unitOfMeasureCommand.description}"></td>
+            <td th:text="${ingredient.description}"></td>
+        </tr>
+    </table>
+</div>
+
+<div>
+    <a href="#" th:href="@{'/recipe/' + ${ingredient.recipeId} + '/ingredients'}">
+        <button>Go back to list</button>
+    </a>
+</div>
+
 
 </body>
 </html>

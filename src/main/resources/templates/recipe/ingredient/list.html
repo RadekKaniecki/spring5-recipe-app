@@ -7,8 +7,16 @@
 <!--/*@thymesVar id="recipe" type="rkaniecki.spring5recipeapp.commands.RecipeCommand"*/-->
 <!--/*@thymesVar id="ingredient" type="rkaniecki.spring5recipeapp.commands.IngredientCommand"*/-->
 <body>
+
+<h3>Ingredients</h3>
+
+<div>
+    <a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/new'}">
+    <button>Create new</button>
+    </a>
+</div>
+
 <div th:if="${!recipe.ingredients.isEmpty()}">
-    <h3>Ingredients</h3>
     <table>
         <thead>
         <tr>
@@ -27,6 +35,12 @@
             <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ingredient.id} + '/delete'}">Delete</a></td>
         </tr>
     </table>
+</div>
+
+<div>
+    <a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/show'}">
+        <button>Go back to recipe</button>
+    </a>
 </div>
 
 </body>

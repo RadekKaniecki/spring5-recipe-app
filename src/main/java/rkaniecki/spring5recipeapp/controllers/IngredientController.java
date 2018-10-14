@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import rkaniecki.spring5recipeapp.commands.IngredientCommand;
+import rkaniecki.spring5recipeapp.commands.RecipeCommand;
+import rkaniecki.spring5recipeapp.commands.UnitOfMeasureCommand;
 import rkaniecki.spring5recipeapp.services.IngredientService;
 import rkaniecki.spring5recipeapp.services.RecipeService;
 import rkaniecki.spring5recipeapp.services.UnitOfMeasureService;
@@ -48,6 +50,21 @@ public class IngredientController {
     public String updateIngredient(@PathVariable Long recipeId, @PathVariable Long ingredientId, Model model) {
         log.debug("Updating ingredient of id: " + ingredientId);
         model.addAttribute("ingredient", ingredientService.findCommandById(ingredientId));
+        model.addAttribute("uomList", unitOfMeasureService.findAllUomsCommand());
+
+        return "recipe/ingredient/ingredientform";
+    }
+
+    @GetMapping("/recipe/{recipeId}/ingredient/new")
+    public String addNewIngredient(@PathVariable Long recipeId, Model model) {
+        RecipeCommand recipeCommand = recipeService.findCommandById(recipeId);
+        //todo raise exception of recipe is null
+
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(recipeId);
+        ingredientCommand.setUnitOfMeasureCommand(new UnitOfMeasureCommand());
+
+        model.addAttribute("ingredient", ingredientCommand);
         model.addAttribute("uomList", unitOfMeasureService.findAllUomsCommand());
 
         return "recipe/ingredient/ingredientform";
