@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Ingredient</title>
+</head>
+<!--/*@thymesVar id="ingredient" type="rkaniecki.spring5recipeapp.commands.IngredientCommand"*/-->
+<body>
+
+<form th:object="${ingredient}" th:action="@{'/recipe/' + ${ingredient.recipeId} + '/ingredient'}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <h1>Edit Ingredient Information</h1>
+
+    <div>
+        <label>Description</label>
+        <input type="text" th:field="*{description}"/>
+    </div>
+
+    <div>
+        <label>Amount</label>
+        <input type="text" th:field="*{amount}"/>
+    </div>
+
+    <div>
+        <label>Unit of Measure</label>
+        <select name="unitOfMeasureCommand.id">
+            <option th:each="uom : ${uomList}"
+                    th:value="${uom.id}"
+                    th:selected="${uom.id.equals(ingredient.unitOfMeasureCommand.id)}"
+                    th:text="${uom.description}">
+            </option>
+        </select>
+    </div>
+
+    <button type="submit">Submit</button>
+
+</form>
+
+</body>
+</html>
