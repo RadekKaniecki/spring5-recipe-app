@@ -6,73 +6,74 @@
 </head>
 <!--/*@thymesVar id="recipe" type="rkaniecki.spring5recipeapp.commands.RecipeCommand"*/-->
 <body>
-    <form th:object="${recipe}" th:action="@{/recipe/}" method="post">
-        <input type="hidden" th:field="*{id}"/>
+<form th:object="${recipe}" th:action="@{/recipe/}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <div>
+        <h3>Edit recipe information</h3>
         <div>
-            <h3>Edit recipe information</h3>
-            <div>
-                <p>Recipe Description:</p>
-                <input type="text" th:field="*{description}"/>
-            </div>
-            <div>
-                <p>Categories:</p>
-                Cat 1
-                <input type="checkbox" value=""/>
-                Cat 2
-                <input type="checkbox" value=""/>
-            </div>
-            <div>
-                <p>Prep time:</p>
-                <input type="text" th:field="*{prepTime}"/>
-            </div>
-            <div>
-                <p>Cook time:</p>
-                <input type="text" th:field="*{cookTime}"/>
-            </div>
-            <div>
-                <p>Servings:</p>
-                <input type="text" th:field="*{servings}"/>
-            </div>
-            <div>
-                <p>Source:</p>
-                <input type="text" th:field="*{source}"/>
-            </div>
-            <div>
-                <p>URL:</p>
-                <input type="text" th:field="*{url}"/>
-            </div>
-            <div>
-                <p>Difficulty:</p>
-                <select>
-                    <option>Easy</option>
-                    <option>Medium</option>
-                    <option>Hard</option>
-                </select>
-            </div>
+            <p>Recipe Description:</p>
+            <input type="text" th:field="*{description}"/>
         </div>
-
         <div>
-            <h3>Ingredients:</h3>
-            <ul>
-                <li th:each="ingredient : ${recipe.getIngredients()}"
+            <p>Categories:</p>
+            Cat 1
+            <input type="checkbox" value=""/>
+            Cat 2
+            <input type="checkbox" value=""/>
+        </div>
+        <div>
+            <p>Prep time:</p>
+            <input type="text" th:field="*{prepTime}"/>
+        </div>
+        <div>
+            <p>Cook time:</p>
+            <input type="text" th:field="*{cookTime}"/>
+        </div>
+        <div>
+            <p>Servings:</p>
+            <input type="text" th:field="*{servings}"/>
+        </div>
+        <div>
+            <p>Source:</p>
+            <input type="text" th:field="*{source}"/>
+        </div>
+        <div>
+            <p>URL:</p>
+            <input type="text" th:field="*{url}"/>
+        </div>
+        <div>
+            <p>Difficulty:</p>
+            <select th:field="*{difficulty}">
+                <option th:each="difficultyValue : ${T(rkaniecki.spring5recipeapp.domain.Difficulty).values()}"
+                        th:value="${difficultyValue.name()}"
+                        th:text="${difficultyValue.name()}"
+                >value</option>
+            </select>
+        </div>
+    </div>
+
+    <div>
+        <h3>Ingredients:</h3>
+        <ul>
+            <li th:each="ingredient : ${recipe.getIngredients()}"
                 th:text="${ingredient.getAmount() +
                         ' - ' + ingredient.getUnitOfMeasureCommand().description +
                         ' - ' + ingredient.getDescription()}"></li>
-            </ul>
-        </div>
+        </ul>
+    </div>
 
-        <div>
-            <h3>Directions:</h3>
-            <textarea rows="5" cols="50" th:field="*{directions}"></textarea>
-        </div>
+    <div>
+        <h3>Directions:</h3>
+        <textarea rows="5" cols="50" th:field="*{directions}"></textarea>
+    </div>
 
-        <div>
-            <h3>Notes</h3>
-            <textarea rows="5" cols="50" th:field="*{notes.recipeNotes}"></textarea>
-        </div>
+    <div>
+        <h3>Notes</h3>
+        <textarea rows="5" cols="50" th:field="*{notes.recipeNotes}"></textarea>
+    </div>
 
-        <input type="submit" value="Submit form">
-    </form>
+    <input type="submit" value="Submit form">
+</form>
 
 </body>
 </html>

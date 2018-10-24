@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import rkaniecki.spring5recipeapp.commands.IngredientCommand;
 import rkaniecki.spring5recipeapp.commands.RecipeCommand;
 import rkaniecki.spring5recipeapp.commands.UnitOfMeasureCommand;
@@ -78,5 +80,15 @@ public class IngredientController {
                 " from recipe id: " + savedIngredient.getRecipeId());
 
         return "redirect:/recipe/" + savedIngredient.getRecipeId() + "/ingredient/" + savedIngredient.getId() + "/show";
+    }
+
+    @RequestMapping(method = {RequestMethod.DELETE, RequestMethod.GET},
+                    value = "/recipe/{recipeId}/ingredient/{ingredientId}/delete")
+    public String deleteIngredient(@PathVariable Long ingredientId) {
+        IngredientCommand ingredientCommandToDelete = ingredientService.findCommandById(ingredientId);
+        log.debug("Deleting ingredient id: " + ingredientId);
+        ingredientService.deleteById(ingredientId);
+
+        return "redirect:/recipe/" + ingredientCommandToDelete.getRecipeId() + "/ingredients";
     }
 }

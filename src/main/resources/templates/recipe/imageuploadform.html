@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload a new recipe image</title>
+</head>
+<!--/*@thymesVar id="recipe" type="rkaniecki.spring5recipeapp.commands.RecipeCommand"*/-->
+<body>
+
+<form method="post" enctype="multipart/form-data"
+        th:action="@{'/recipe/' + ${recipe.id} + '/image'}">
+    <label>Select File</label>
+    <input id="imagefile" name="imagefile" type="file">
+    <br>
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>

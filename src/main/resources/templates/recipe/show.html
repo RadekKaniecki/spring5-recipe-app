@@ -6,66 +6,82 @@
 </head>
 <!--/*@thymesVar id="recipe" type="rkaniecki.spring5recipeapp.domain.Recipe"*/-->
 <body>
+<div>
+    <h4 th:text="${recipe.description}">Recipe description here!</h4>
+
     <div>
-        <h4 th:text="${recipe.description}">Recipe description here!</h4>
-
-        <p>Categories:</p>
-        <ul>
-            <li th:each="category : ${recipe.categories}" th:text="${category.description}"></li>
-        </ul>
-
-        <p>Prep time:</p>
-        <ul>
-            <li th:text="${recipe.prepTime + ' min'}"></li>
-        </ul>
-
-
-        <p>Cook time:</p>
-        <ul>
-            <li th:text="${recipe.cookTime + ' min'}"></li>
-        </ul>
-
-        <p>Source:</p>
-        <ul>
-            <li th:text="${recipe.source}"></li>
-        </ul>
-
-        <p>Difficulty:</p>
-        <ul>
-            <li th:text="${recipe.difficulty}"></li>
-        </ul>
-
-        <p>Servings:</p>
-        <ul>
-            <li th:text="${recipe.servings}"></li>
-        </ul>
-
-        <p>URL:</p>
-        <ul>
-            <li th:text="${recipe.url}"></li>
-        </ul>
+        <img th:src="@{'/recipe/' + ${recipe.id} + '/recipeimage'}">
     </div>
 
     <div>
-        <h4>Ingredients</h4>
-        <ul>
-            <li th:each="ingredient : ${recipe.ingredients}"
-                th:text="${ingredient.amount +
+        <a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/image'}">
+            <button>Change image</button>
+        </a>
+    </div>
+
+    <p>Categories:</p>
+    <ul>
+        <li th:each="category : ${recipe.categories}" th:text="${category.description}"></li>
+    </ul>
+
+    <p>Prep time:</p>
+    <ul>
+        <li th:text="${recipe.prepTime + ' min'}"></li>
+    </ul>
+
+
+    <p>Cook time:</p>
+    <ul>
+        <li th:text="${recipe.cookTime + ' min'}"></li>
+    </ul>
+
+    <p>Source:</p>
+    <ul>
+        <li th:text="${recipe.source}"></li>
+    </ul>
+
+    <p>Difficulty:</p>
+    <ul>
+        <li th:text="${recipe.difficulty}"></li>
+    </ul>
+
+    <p>Servings:</p>
+    <ul>
+        <li th:text="${recipe.servings}"></li>
+    </ul>
+
+    <p>URL:</p>
+    <ul>
+        <li th:text="${recipe.url}"></li>
+    </ul>
+</div>
+
+<div>
+    <h4>Ingredients</h4>
+    <ul>
+        <li th:each="ingredient : ${recipe.ingredients}"
+            th:text="${ingredient.amount +
                 ' - ' + ingredient.unitOfMeasure.description +
                 ' - ' + ingredient.description}"></li>
-        </ul>
-        <a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}">View</a>
-    </div>
+    </ul>
+    <a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}">View</a>
+</div>
 
-    <div>
-        <h4>Directions</h4>
-        <p th:text="${recipe.directions}"></p>
-    </div>
+<div>
+    <h4>Directions</h4>
+    <p th:text="${recipe.directions}"></p>
+</div>
 
-    <div>
-        <h4>Notes:</h4>
-        <p th:text="${recipe.notes.recipeNotes}"></p>
-    </div>
+<div>
+    <h4>Notes:</h4>
+    <p th:text="${recipe.notes.recipeNotes}"></p>
+</div>
+
+<div>
+    <a href="#" th:href="@{'/'}">
+        <button>Go back to recipe list</button>
+    </a>
+</div>
 
 </body>
 </html>
