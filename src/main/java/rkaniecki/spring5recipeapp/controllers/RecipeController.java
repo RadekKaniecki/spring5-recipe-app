@@ -4,7 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import rkaniecki.spring5recipeapp.commands.RecipeCommand;
+import rkaniecki.spring5recipeapp.exceptions.NotFoundException;
 import rkaniecki.spring5recipeapp.services.RecipeService;
 
 @Slf4j
@@ -52,5 +54,29 @@ public class RecipeController {
         recipeService.deleteById(id);
 
         return "redirect:/";
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ModelAndView handleNotFound(Exception exception) {
+        log.error("Handing not found exception");
+        log.error(exception.getMessage());
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("404error");
+        modelAndView.addObject("exception", exception);
+
+        return modelAndView;
+    }
+
+    @ExceptionHandler(NumberFormatException.class)
+    public ModelAndView handleWrongNumberFormat(Exception exception) {
+        log.error("Handling wrong format exception");
+        log.error(exception.getMessage());
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("400error");
+        modelAndView.addObject("exception", exception);
+
+        return modelAndView;
     }
 }
