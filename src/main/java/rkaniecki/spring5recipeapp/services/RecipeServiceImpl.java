@@ -6,6 +6,7 @@ import rkaniecki.spring5recipeapp.commands.RecipeCommand;
 import rkaniecki.spring5recipeapp.converters.RecipeCommandToRecipe;
 import rkaniecki.spring5recipeapp.converters.RecipeToRecipeCommand;
 import rkaniecki.spring5recipeapp.domain.Recipe;
+import rkaniecki.spring5recipeapp.exceptions.NotFoundException;
 import rkaniecki.spring5recipeapp.repositories.RecipeRepository;
 
 import javax.transaction.Transactional;
@@ -41,7 +42,8 @@ public class RecipeServiceImpl implements RecipeService {
         Optional<Recipe> recipeOptional = recipeRepository.findById(id);
 
         if (!recipeOptional.isPresent()) {
-            throw new RuntimeException("Couldn't find recipe by ID " + id);
+//            throw new RuntimeException("Couldn't find recipe by ID " + id);
+            throw new NotFoundException("Couldn't find recipe by ID " + id);
         }
 
         return  recipeOptional.get();
