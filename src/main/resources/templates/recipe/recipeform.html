@@ -8,11 +8,23 @@
 <body>
 <form th:object="${recipe}" th:action="@{/recipe/}" method="post">
     <input type="hidden" th:field="*{id}"/>
+
+    <div th:if="${#fields.hasErrors('*')}">
+        <span style="color: red">
+            <p>Please correct errors below</p>
+        </span>
+    </div>
+
     <div>
         <h3>Edit recipe information</h3>
         <div>
             <p>Recipe Description:</p>
             <input type="text" th:field="*{description}"/>
+            <span style="color: red" th:if="${#fields.hasErrors('description')}">
+                <ul>
+                    <li th:each="error : ${#fields.errors('description')}" th:text="${error}"></li>
+                </ul>
+            </span>
         </div>
         <div>
             <p>Categories:</p>
@@ -24,14 +36,29 @@
         <div>
             <p>Prep time:</p>
             <input type="text" th:field="*{prepTime}"/>
+            <span style="color: red" th:if="${#fields.hasErrors('prepTime')}">
+                <ul>
+                    <li th:each="error : ${#fields.errors('prepTime')}" th:text="${error}"></li>
+                </ul>
+            </span>
         </div>
         <div>
             <p>Cook time:</p>
             <input type="text" th:field="*{cookTime}"/>
+            <span style="color: red" th:if="${#fields.hasErrors('cookTime')}">
+                <ul>
+                    <li th:each="error : ${#fields.errors('cookTime')}" th:text="${error}"></li>
+                </ul>
+            </span>
         </div>
         <div>
             <p>Servings:</p>
             <input type="text" th:field="*{servings}"/>
+            <span style="color: red" th:if="${#fields.hasErrors('servings')}">
+                <ul>
+                    <li th:each="error : ${#fields.errors('servings')}" th:text="${error}"></li>
+                </ul>
+            </span>
         </div>
         <div>
             <p>Source:</p>
@@ -40,6 +67,11 @@
         <div>
             <p>URL:</p>
             <input type="text" th:field="*{url}"/>
+            <span style="color: red" th:if="${#fields.hasErrors('url')}">
+                <ul>
+                    <li th:each="error : ${#fields.errors('url')}" th:text="${error}"></li>
+                </ul>
+            </span>
         </div>
         <div>
             <p>Difficulty:</p>
@@ -47,7 +79,8 @@
                 <option th:each="difficultyValue : ${T(rkaniecki.spring5recipeapp.domain.Difficulty).values()}"
                         th:value="${difficultyValue.name()}"
                         th:text="${difficultyValue.name()}"
-                >value</option>
+                >value
+                </option>
             </select>
         </div>
     </div>
@@ -65,6 +98,11 @@
     <div>
         <h3>Directions:</h3>
         <textarea rows="5" cols="50" th:field="*{directions}"></textarea>
+        <span style="color: red" th:if="${#fields.hasErrors('directions')}">
+            <ul>
+                <li th:each="error : ${#fields.errors('directions')}" th:text="${error}"></li>
+            </ul>
+        </span>
     </div>
 
     <div>
