@@ -1,16 +1,11 @@
 package rkaniecki.spring5recipeapp.controllers;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import rkaniecki.spring5recipeapp.commands.RecipeCommand;
 import rkaniecki.spring5recipeapp.exceptions.NotFoundException;
@@ -29,9 +24,9 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
-    @GetMapping("recipe/{id}/show")
-    public String showById(@PathVariable Long id, Model model) {
-        model.addAttribute("recipe", recipeService.findById(id));
+    @GetMapping("recipe/{recipeId}/show")
+    public String showById(@PathVariable Long recipeId, Model model) {
+        model.addAttribute("recipe", recipeService.findCommandById(recipeId));
 
         return "recipe/show";
     }
@@ -76,6 +71,7 @@ public class RecipeController {
         return "redirect:/";
     }
 
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
     public ModelAndView handleNotFound(Exception exception) {
         log.error("Handing not found exception");
