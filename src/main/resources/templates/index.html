@@ -2,35 +2,55 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+    <style>
+        .mytable {
+            padding-top: 60px;
+        }
+    </style>
+
     <title>Title</title>
 </head>
 <!--/*@thymesVar id="recipe" type="rkaniecki.spring5recipeapp.domain.Recipe"*/-->
 <body>
-  <h1>Recipes</h1>
 
-  <div>
-      <h3>Create new recipe</h3>
-      <a href="#" th:href="@{'recipe/new'}">Create</a>
-  </div>
+<div class="card">
+    <div class="card text-center">
+        <div class="card-body">
+            <h5 class="card-title">Welcome to Recipe application!</h5>
+            <p class="card-text">You can browse existing recipes, or click button below and create a new one.</p>
+            <a href="#" class="btn btn-primary" th:href="@{'recipe/new'}">Create new recipe</a>
+        </div>
+    </div>
+</div>
 
-  <br>
-
-  <div>
-      <table>
-          <tr>
-              <th>ID</th>
-              <th>Description</th>
-              <th>View</th>
-          </tr>
-          <tr th:each="recipe : ${recipes}">
-              <td th:text="${recipe.id}">123</td>
-              <td th:text="${recipe.description}">test</td>
-              <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/show'}">View</a></td>
-              <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/update'}">Update</a></td>
-              <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/delete'}">Delete</a></td>
-          </tr>
-      </table>
-  </div>
+<div class="mytable">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Description</th>
+                <th scope="col">View</th>
+                <th scope="col">Update</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="recipe : ${recipes}">
+                <td th:text="${recipe.id}">123</td>
+                <td th:text="${recipe.description}">test</td>
+                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/show'}">View</a></td>
+                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/update'}">Update</a></td>
+                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/delete'}">Delete</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>
