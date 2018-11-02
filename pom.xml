@@ -74,9 +74,6 @@
             <artifactId>webjars-locator</artifactId>
             <version>0.34</version>
         </dependency>
-
-
-
     </dependencies>
 
     <build>
